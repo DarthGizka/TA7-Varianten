@@ -67,10 +67,10 @@ enum Stil
 	/** gibt an, ob kleine Stummel für die Base64-kodierten Daten verwendet werden sollen; falls nicht dann
 	 * werden für jedes Rezept die Daten für Verordnung, Quittung und Abgabedaten aus Vorlagen generiert */
 	Base64Stummel   = 1,
-	/** gibt an, absolute URLs im FHIR-Stil als entry.fullUrl verwendet werden sollen anstelle von URN:UUID */
+	/** gibt an, absolute URLs im FHIR-Stil als `fullUrl` verwendet werden sollen anstelle von URN:UUID */
 	FHIRlicheURLs   = 2,
 	/** gibt an, daß UUIDs als resource.id verwendet werden sollen; bei URN:UUID als `fullUrl` bewirkt das
-	 * bewirkt das auch die Emission der ansonsten unterdrückten `id`-Elemente */
+	 * auch die Emission der ansonsten unterdrückten `id`-Elemente */
 	UUID_als_Id     = 4,
 	XML_minifiziert = 8
 }
