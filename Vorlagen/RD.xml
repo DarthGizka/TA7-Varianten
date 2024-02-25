@@ -1,0 +1,94 @@
+<Bundle xmlns="http://hl7.org/fhir">
+	<id value="."/>
+	<meta>
+		<profile value="https://fhir.gkvsv.de/StructureDefinition/GKVSV_PR_TA7_Rechnung_Bundle|1.3"/>
+	</meta>
+	<identifier>
+		<extension url="https://fhir.gkvsv.de/StructureDefinition/GKVSV_EX_ERP_TA7_Dateinummer">
+			<valueString value="00001"/>
+		</extension>
+		<system value="https://fhir.gkvsv.de/NamingSystem/GKVSV_NS_Dateiname"/>
+		<value value="ARZFHR23001"/>
+	</identifier>
+	<type value="collection"/>
+	<!-- Zeitstempel in die Zukunft verschoben, um nicht mit Plausi-Tests zu kollidieren -->
+	<timestamp value="2023-12-01T12:34:56Z"/>
+	<entry>
+		<fullUrl value="http://zrbj.eu/x/Composition/4"/>
+		<resource>
+			<Composition>
+				<id value="4"/>
+				<meta>
+					<profile value="https://fhir.gkvsv.de/StructureDefinition/GKVSV_PR_TA7_Rechnung_Composition|1.3"/>
+				</meta>
+				<extension url="https://fhir.gkvsv.de/StructureDefinition/GKVSV_EX_TA7_IK_Empfaenger">
+					<valueIdentifier>
+						<system value="http://fhir.de/sid/arge-ik/iknr"/>
+						<value value="101575519"/>
+					</valueIdentifier>
+				</extension>
+				<extension url="https://fhir.gkvsv.de/StructureDefinition/GKVSV_EX_TA7_IK_Kostentraeger">
+					<valueIdentifier>
+						<system value="http://fhir.de/sid/arge-ik/iknr"/>
+						<value value="101575519"/>
+					</valueIdentifier>
+				</extension>
+				<identifier>
+					<system value="https://fhir.gkvsv.de/NamingSystem/GKVSV_NS_Rechnungsnummer"/>
+					<value value="1234-23"/>
+				</identifier>
+				<status value="final"/>
+				<type>
+					<coding>
+						<system value="https://fhir.gkvsv.de/CodeSystem/GKVSV_CS_ERP_Rechnungsart"/>
+						<code value="6"/>
+					</coding>
+				</type>
+				<date value="2023-11-30">
+					<extension url="https://fhir.gkvsv.de/StructureDefinition/GKVSV_EX_ERP_TA7_Rechnungsdatum">
+						<valueDateTime value="2023-12-01"/>
+					</extension>
+				</date>
+				<author>
+					<identifier>
+						<system value="http://fhir.de/sid/arge-ik/iknr"/>
+						<value value="661234561"/>
+					</identifier>
+				</author>
+				<title value="elektronische Rechnung"/>
+				<section>
+					<code>
+						<coding>
+							<system value="https://fhir.gkvsv.de/CodeSystem/GKVSV_CS_ERP_TA7"/>
+							<code value="LR"/>
+						</coding>
+					</code>
+					<entry>
+						<reference value="List/1"/>
+					</entry>
+				</section>
+			</Composition>
+		</resource>
+	</entry>
+	<entry>
+		<fullUrl value="http://zrbj.eu/x/List/1"/>
+		<resource>
+			<List>
+				<id value="1"/>
+				<meta>
+					<profile value="https://fhir.gkvsv.de/StructureDefinition/GKVSV_PR_TA7_Rechnung_List|1.3"/>
+				</meta>
+				<status value="current"/>
+				<mode value="working"/>
+				<entry>
+					<item>
+						<identifier>
+							<system value="https://fhir.gkvsv.de/NamingSystem/GKVSV_NS_Dateiname"/>
+							<value value="ARZFHR23001"/>
+						</identifier>
+					</item>
+				</entry>
+			</List>
+		</resource>
+	</entry>
+</Bundle>

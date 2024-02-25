@@ -1,0 +1,103 @@
+<!--
+	Gematik-Quittung ohne Signatur (i.e. der signierte Inhalt) als abgespeckte Variante der neuen Gematik-Version
+	vom 07.02.2024, die etwas übers Ziel hinausgeschossen war: Änderungsbedarf bestand nur bei der fehlerhaften 
+	Referenz auf den Eintrag für den Verordnungshash, und die Umstellung dieses Eintrags auf UUID-Identifizierung
+	hat auch Sinn; beim Device-Eintrag war die Identifizierung über eine FHIRliche URL dagegen durchaus sinnvoll 
+	und legitim, da das Device eine über die jeweils vorliegende Quittung hinausgehende Existenz hat und u.U. auch
+	anderswo über die gleiche URL identifiziert/referenziert/abgerufen wird
+
+	$vc -version R4 -best-practice ignore -ig de.gematik.erezept-workflow.r4#1.2.3 GQ.xml
+	$gv erp GQ.xml
+-->
+<Bundle xmlns="http://hl7.org/fhir">
+	<id value="a0000001-0000-0000-0003-000000000000"/>
+	<meta>
+		<profile value="https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_Bundle|1.2"/>
+	</meta>
+	<identifier>
+		<system value="https://gematik.de/fhir/erp/NamingSystem/GEM_ERP_NS_PrescriptionId"/>
+		<value value="160.123.456.789.123.58"/>
+	</identifier>
+	<type value="document"/>
+	<timestamp value="2024-02-25T12:34:56.124+00:00"/>
+	<link>
+		<relation value="self"/>
+		<url value="https://erp.zentral.erp.splitdns.ti-dienste.de/Task/160.123.456.789.123.58/$close/"/>
+	</link>
+	<entry>
+		<fullUrl value="urn:uuid:05068d86-3298-4acd-be3d-8fa3162c203d"/>
+		<resource>
+			<Composition>
+				<!-- Quittung/20240207 hat hier die UUID als Id, aber das ist nutzloser Ballast -->
+				<meta>
+					<profile value="https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_Composition|1.2"/>
+				</meta>
+				<extension url="https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_EX_Beneficiary">
+					<valueIdentifier>
+						<system value="https://gematik.de/fhir/sid/telematik-id"/>
+						<value value="3-00.0.0000000000.000"/>
+					</valueIdentifier>
+				</extension>
+				<status value="final"/>
+				<type>
+					<coding>
+						<system value="https://gematik.de/fhir/erp/CodeSystem/GEM_ERP_CS_DocumentType"/>
+						<code value="3"/>
+					</coding>
+				</type>
+				<date value="2024-02-25T12:34:56.123+00:00"/>
+				<author>
+					<reference value="urn:uuid:51a3ee5c-80df-4510-818a-917c2c05223d"/>
+				</author>
+				<title value="Quittung"/>
+				<event>
+					<period>
+						<start value="2024-02-07T14:14:24.863+00:00"/>
+						<end value="2024-02-25T12:34:56.123+00:00"/>
+					</period>
+				</event>
+				<section>
+					<entry>
+						<reference value="urn:uuid:a1bd4cd9-7f11-43e0-b485-3eb20ae52a42"/>
+					</entry>
+				</section>
+			</Composition>
+		</resource>
+	</entry>
+	<entry>
+		<!-- Vergabe einer neuen UUID hier (trotz des abweichenden Inhalts) genauso wenig notwendig wie bei
+		der ursprünglichen Variante mit FHIRlicher URL (-> Version ein und derselben logische Resource) -->
+		<fullUrl value="urn:uuid:51a3ee5c-80df-4510-818a-917c2c05223d"/>
+		<resource>
+			<Device>
+				<!-- Quittung/20240207 hat hier die UUID als Id, aber das ist nutzloser Ballast -->
+				<meta>
+					<profile value="https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_Device|1.2"/>
+				</meta>
+				<status value="active"/>
+				<!-- Quittung/20240207 hat hier noch ein Feld `serialNumber` mit gleichem Inhalt wie `version.value` -->
+				<deviceName>
+					<name value="E-Rezept Fachdienst"/>
+					<type value="user-friendly-name"/>
+				</deviceName>
+				<version>
+					<value value="1.13.0"/>
+				</version>
+				<!-- Quittung/20240207 hat hier noch einen E-Mail-Kontakt (betrieb@gematik.de) -->
+			</Device>
+		</resource>
+	</entry>
+	<entry>
+		<fullUrl value="urn:uuid:a1bd4cd9-7f11-43e0-b485-3eb20ae52a42"/>
+		<resource>
+			<Binary>
+				<!-- Quittung/20240207 hat hier die UUID als Id, aber das ist nutzloser Ballast -->
+				<meta>
+					<profile value="https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_Digest|1.2"/>
+				</meta>
+				<contentType value="application/octet-stream"/>
+				<data value="Y8nQ5of9uF0yrykBEfAfIdILUza2eOKKhqMkqDvW2bc="/>
+			</Binary>
+		</resource>
+	</entry>
+</Bundle>
